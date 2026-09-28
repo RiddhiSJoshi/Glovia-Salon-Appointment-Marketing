@@ -8,6 +8,7 @@ import About from "./Pages/About";
 import Services from "./Pages/Services";
 import Contact from "./Pages/Contact";
 import Login from "./Pages/Login";
+import Register from "./Pages/Register";
 
 import "./App.scss";
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register/>}/>
           </Routes>
         </main>
 

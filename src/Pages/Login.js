@@ -1,25 +1,74 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+import { login } from "../Api/Auth";
 
 import "./Login.scss";
 
 function Login() {
-  const [role, setRole] = useState("customer");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const [username, setUsername] =
+    useState("");
+
+  const [password, setPassword] =
+    useState("");
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const [error, setError] =
+    useState("");
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log({
-      email,
-      password,
-      role,
-    });
+    setError("");
+    setLoading(true);
 
-    alert(
-      "Login API will be connected here."
-    );
+    try {
+      const response =
+        await login({
+          username,
+          password,
+        });
+
+      console.log(
+        "Customer login successful:",
+        response
+      );
+
+      /*
+      |--------------------------------------------------------------------------
+      | CustomerWeb redirect
+      |--------------------------------------------------------------------------
+      |
+      | During development, replace this URL
+      | with your customerweb URL.
+      |
+      */
+
+      window.location.href =
+        "http://localhost:3001/";
+
+    } catch (error) {
+      console.error(
+        "Login failed:",
+        error
+      );
+
+      setError(
+        error?.response?.data?.detail ||
+        error?.message ||
+        "Login failed. Please check your credentials."
+      );
+
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <div className="login-page">
@@ -27,6 +76,7 @@ function Login() {
       <div className="login-container">
 
         <div className="login-brand">
+
           <div className="login-logo">
             G
           </div>
@@ -36,55 +86,21 @@ function Login() {
           </h1>
 
           <p>
-            Sign in to continue to your Glōvia experience.
+            Sign in to continue to
+            your Glōvia experience.
           </p>
-        </div>
-
-        <div className="role-selector">
-
-          <button
-            type="button"
-            className={
-              role === "customer"
-                ? "active"
-                : ""
-            }
-            onClick={() =>
-              setRole("customer")
-            }
-          >
-            Customer
-          </button>
-
-          <button
-            type="button"
-            className={
-              role === "salon"
-                ? "active"
-                : ""
-            }
-            onClick={() =>
-              setRole("salon")
-            }
-          >
-            Salon
-          </button>
-
-          <button
-            type="button"
-            className={
-              role === "admin"
-                ? "active"
-                : ""
-            }
-            onClick={() =>
-              setRole("admin")
-            }
-          >
-            Admin
-          </button>
 
         </div>
+
+
+        {error && (
+          <div className="login-error">
+            <span>!</span>
+
+            <p>{error}</p>
+          </div>
+        )}
+
 
         <form
           className="login-form"
@@ -92,18 +108,21 @@ function Login() {
         >
 
           <label>
-            Email
+            Username
 
             <input
-              type="email"
-              value={email}
+              type="text"
+              value={username}
               onChange={(event) =>
-                setEmail(event.target.value)
+                setUsername(
+                  event.target.value
+                )
               }
-              placeholder="Enter your email"
+              placeholder="Enter your username"
               required
             />
           </label>
+
 
           <label>
             Password
@@ -112,21 +131,28 @@ function Login() {
               type="password"
               value={password}
               onChange={(event) =>
-                setPassword(event.target.value)
+                setPassword(
+                  event.target.value
+                )
               }
               placeholder="Enter your password"
               required
             />
           </label>
 
+
           <div className="login-options">
+
             <label className="remember">
+
               <input
                 type="checkbox"
               />
 
               Remember me
+
             </label>
+
 
             <button
               type="button"
@@ -134,22 +160,40 @@ function Login() {
             >
               Forgot password?
             </button>
+
           </div>
+
 
           <button
             type="submit"
             className="primary-btn"
+            disabled={loading}
           >
-            Sign In
+            {loading
+              ? "Signing In..."
+              : "Sign In"}
           </button>
 
         </form>
 
+
+        {/* Register */}
+
+        <div className="login-register">
+
+          <span>
+            Don't have an account?
+          </span>
+
+          <Link to="/register">
+            Sign up
+          </Link>
+
+        </div>
+
+
         <p className="login-note">
-          Selected portal:{" "}
-          <strong>
-            {role}
-          </strong>
+          Customer login only
         </p>
 
       </div>
