@@ -6,6 +6,7 @@ function Services() {
   return (
     <div className="services-page">
 
+      {/* Hero */}
       <section className="page-hero">
         <div className="container">
 
@@ -26,7 +27,8 @@ function Services() {
         </div>
       </section>
 
-      <section className="section">
+      {/* Services */}
+      <section className="section services-section">
         <div className="container">
 
           <div className="service-list">
@@ -36,21 +38,37 @@ function Services() {
                 className="service-item"
                 key={category.id}
               >
-                <div className="service-icon">
-                  {category.icon}
+
+                {/* Service image */}
+                <div className="service-image">
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                  />
                 </div>
 
-                <div>
-                  <h2>{category.name}</h2>
+                {/* Content */}
+                <div className="service-content">
+
+                  <span className="service-label">
+                    BEAUTY SERVICE
+                  </span>
+
+                  <h2>
+                    {category.name}
+                  </h2>
 
                   <p>
                     {category.description}
                   </p>
+
                 </div>
 
+                {/* Arrow */}
                 <span className="service-arrow">
                   →
                 </span>
+
               </div>
             ))}
 

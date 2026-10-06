@@ -1,56 +1,59 @@
+import hairImage from "../Images/hair-mark.png";
+import skinImage from "../Images/skin-mark.png";
+import nailImage from "../Images/nail-mark.png";
+import makeupImage from "../Images/makeup-mark.png";
+
+import glowStudio from "../Images/glow-studio.png";
+import beautyLounge from "../Images/beauty-lounge.png";
+import velvetSalon from "../Images/velvet-salon.png";
+
 export const categories = [
   {
     id: 1,
     name: "Hair",
-    icon: "✂",
-    description: "Cuts, styling and treatments",
+    description: "Haircuts, styling, coloring and treatments.",
+    image: hairImage,
   },
   {
     id: 2,
     name: "Skin",
-    icon: "✦",
-    description: "Facials and skincare",
+    description: "Facials, cleanup and professional skin treatments.",
+    image: skinImage,
   },
   {
     id: 3,
     name: "Nails",
-    icon: "♡",
-    description: "Manicure and nail care",
+    description: "Manicure, pedicure and beautiful nail art.",
+    image: nailImage,
   },
   {
     id: 4,
     name: "Makeup",
-    icon: "◉",
-    description: "Beauty and makeup services",
+    description: "Professional makeup for every special occasion.",
+    image: makeupImage,
   },
 ];
 
 export const salons = [
   {
     id: 1,
-    name: "The Glow Studio",
+    name: "Glow Studio",
     location: "Chennai",
-    rating: "4.9",
-    services: 24,
-    description:
-      "Modern beauty studio offering premium hair and beauty services.",
+    rating: 4.8,
+    image: glowStudio,
   },
   {
     id: 2,
-    name: "Aura Beauty Lounge",
+    name: "The Beauty Lounge",
     location: "Chennai",
-    rating: "4.8",
-    services: 31,
-    description:
-      "A relaxing beauty destination for your everyday self-care.",
+    rating: 4.7,
+    image: beautyLounge,
   },
   {
     id: 3,
     name: "Velvet Salon",
-    location: "Chennai",
-    rating: "4.7",
-    services: 19,
-    description:
-      "Professional stylists and personalized beauty experiences.",
+    location: "Bengaluru",
+    rating: 4.9,
+    image: velvetSalon,
   },
 ];

@@ -3,7 +3,6 @@ import { useState } from "react";
 import HeroSection from "../Components/HeroSection";
 import SalonCard from "../Components/SalonCard";
 
-
 import { categories, salons } from "../Data/mockData";
 
 import "./Home.scss";
@@ -12,9 +11,7 @@ function Home() {
   const [search, setSearch] = useState("");
 
   const filteredSalons = salons.filter((salon) =>
-    salon.name
-      .toLowerCase()
-      .includes(search.toLowerCase())
+    salon.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -40,7 +37,6 @@ function Home() {
               trusted salons near you.
             </p>
           </div>
-          
 
           <div className="categories-grid">
             {categories.map((category) => (
@@ -48,15 +44,26 @@ function Home() {
                 className="category-card"
                 key={category.id}
               >
-                <div className="category-icon">
-                  {category.icon}
+
+                <div className="category-image">
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                  />
                 </div>
 
-                <h3>{category.name}</h3>
+                <div className="category-content">
+                  <h3>{category.name}</h3>
 
-                <p>
-                  {category.description}
-                </p>
+                  <p>
+                    {category.description}
+                  </p>
+
+                  <span className="category-link">
+                    Explore services →
+                  </span>
+                </div>
+
               </div>
             ))}
           </div>
@@ -64,7 +71,7 @@ function Home() {
         </div>
       </section>
 
-      {/* Search salons */}
+      {/* Search Salons */}
       <section className="section salons-section">
         <div className="container">
 
@@ -84,7 +91,7 @@ function Home() {
           </div>
 
           <div className="salon-search">
-            <span>⌕</span>
+            <span className="search-symbol">⌕</span>
 
             <input
               type="text"
@@ -107,7 +114,10 @@ function Home() {
             </div>
           ) : (
             <div className="empty-state">
-              <div>⌕</div>
+
+              <div className="empty-search">
+                ⌕
+              </div>
 
               <h3>
                 No salons found
@@ -116,6 +126,7 @@ function Home() {
               <p>
                 Try searching with another salon name.
               </p>
+
             </div>
           )}
 
